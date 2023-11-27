@@ -27,8 +27,8 @@ void processInput(GLFWwindow *window);
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1600;
+const unsigned int SCR_HEIGHT = 1200;
 
 // camera
 
@@ -158,6 +158,10 @@ int main() {
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    //Face culling
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     // build and compile shaders
     // -------------------------
@@ -168,8 +172,8 @@ int main() {
     Model ourModel("resources/objects/ball/untitled.obj");
     ourModel.SetShaderTextureNamePrefix("material.");
     // -----------
-//    Model ball("resources/objects/ball/untitled.obj");
-//    ourModel.SetShaderTextureNamePrefix("material.");
+    Model field("resources/objects/field/Saha.obj");
+    field.SetShaderTextureNamePrefix("material.");
 
     PointLight& pointLight = programState->pointLight;
     pointLight.position = glm::vec3(4.0f, 4.0, 0.0);
@@ -224,13 +228,20 @@ int main() {
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
 
-        // render the loaded model
+        // render ball model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model,
                                programState->backpackPosition); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(programState->backpackScale));    // it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
+        // render field model
+        glm::mat4 modelField = glm::mat4(1.0f);
+        modelField = glm::translate(modelField,
+                               programState->backpackPosition); // translate it down so it's at the center of the scene
+        modelField = glm::scale(modelField, glm::vec3(programState->backpackScale));    // it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", modelField);
+        field.Draw(ourShader);
 
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
