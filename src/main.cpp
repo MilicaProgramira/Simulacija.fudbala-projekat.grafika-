@@ -52,6 +52,7 @@ struct PointLight {
 };
 
 struct ProgramState {
+
     glm::vec3 clearColor = glm::vec3(0);
     bool ImGuiEnabled = false;
     Camera camera;
@@ -158,10 +159,14 @@ int main() {
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    //Blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //Face culling
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
+
 
     // build and compile shaders
     // -------------------------
@@ -169,11 +174,14 @@ int main() {
 
     // load models
     // -----------
-    Model ourModel("resources/objects/ball/untitled.obj");
-    ourModel.SetShaderTextureNamePrefix("material.");
+    Model ball("resources/objects/ball/untitled.obj");
+    ball.SetShaderTextureNamePrefix("material.");
     // -----------
     Model field("resources/objects/field/Saha.obj");
     field.SetShaderTextureNamePrefix("material.");
+    // -----------
+    Model palm("resources/objects/palm/untitled.obj");
+    palm.SetShaderTextureNamePrefix("material.");
 
     PointLight& pointLight = programState->pointLight;
     pointLight.position = glm::vec3(4.0f, 4.0, 0.0);
@@ -227,21 +235,49 @@ int main() {
         glm::mat4 view = programState->camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
+        // render models ------------------------------------------------------------------------------
 
         // render ball model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model,
-                               programState->backpackPosition); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(programState->backpackScale));    // it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+        glm::mat4 modelBall = glm::mat4(1.0f);
+        modelBall = glm::translate(modelBall,glm::vec3(0.0f,0.02f,0.0f));
+        modelBall = glm::scale(modelBall, glm::vec3(0.1f));
+        ourShader.setMat4("model", modelBall);
+        ball.Draw(ourShader);
+
         // render field model
         glm::mat4 modelField = glm::mat4(1.0f);
-        modelField = glm::translate(modelField,
-                               programState->backpackPosition); // translate it down so it's at the center of the scene
-        modelField = glm::scale(modelField, glm::vec3(programState->backpackScale));    // it's a bit too big for our scene, so scale it down
+        modelField = glm::translate(modelField,glm::vec3(0.0f,-1.4f,0.0f));
+        modelField = glm::scale(modelField, glm::vec3(3.5f));
         ourShader.setMat4("model", modelField);
         field.Draw(ourShader);
+
+        //render palm
+        glm::mat4 modelPalm = glm::mat4(1.0f);
+        modelPalm = glm::translate(modelPalm,glm::vec3(-3.25f,0.0f,-2.7f));
+        modelPalm = glm::scale(modelPalm, glm::vec3(0.7f));
+        ourShader.setMat4("model", modelPalm);
+        palm.Draw(ourShader);
+        //render palm 2
+        modelPalm = glm::mat4(1.0f);
+        modelPalm = glm::translate(modelPalm,glm::vec3(-3.3f,0.0f,2.7f));
+        modelPalm = glm::scale(modelPalm, glm::vec3(0.7f));
+        modelPalm = glm::rotate(modelPalm,glm::radians(-35.4f), glm::vec3(0.0f ,1.0f, 0.0f));
+        ourShader.setMat4("model", modelPalm);
+        palm.Draw(ourShader);
+        //render palm 3
+        modelPalm = glm::mat4(1.0f);
+        modelPalm = glm::translate(modelPalm,glm::vec3(3.4f,0.0f,2.7f));
+        modelPalm = glm::scale(modelPalm, glm::vec3(0.7f));
+        modelPalm = glm::rotate(modelPalm,glm::radians(55.0f), glm::vec3(0.0f ,1.0f, 0.0f));
+        ourShader.setMat4("model", modelPalm);
+        palm.Draw(ourShader);
+        // render palm 4
+        modelPalm = glm::mat4(1.0f);
+        modelPalm = glm::translate(modelPalm,glm::vec3(3.35f,0.0f,-2.6f));
+        modelPalm = glm::scale(modelPalm, glm::vec3(0.7f));
+        modelPalm = glm::rotate(modelPalm,glm::radians(-75.0f), glm::vec3(0.0f ,1.0f, 0.0f));
+        ourShader.setMat4("model", modelPalm);
+        palm.Draw(ourShader);
 
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
@@ -348,6 +384,7 @@ void DrawImGui(ProgramState *programState) {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_F1 && action == GLFW_PRESS) {

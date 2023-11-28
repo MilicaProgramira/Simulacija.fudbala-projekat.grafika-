@@ -1,0 +1,22 @@
+# Blender 4.0.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Branches_v2x4
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd VB2X4_003.png
+
+newmtl Trunk
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd from_internet_003.jpg
