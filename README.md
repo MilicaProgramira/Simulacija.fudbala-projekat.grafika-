@@ -15,4 +15,13 @@ Projekat iz Računarske grafike na Matematičkom fakultetu u Beogradu.
 11. `UP` `LEFT` `DOWN` `RIGHT` pomeranje lopte
 12. `F1` imgui
 
+- Implementirane teme zaključno sa 8. nedeljom vežbi,
+- blending,
+- face culling,
+- advanced lighting,
+- framebuffers
+- cubemaps
+- hdr
+- bloom
+
 Milica Lemajic
