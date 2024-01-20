@@ -1,6 +1,6 @@
 # project_base
-Simulacija fudbala, kontrolisemo loptu po terenu.
-Projekat iz Računarske grafike na Matematičkom fakultetu u Beogradu.
+Ovo je moj prvi projekat iz Računarske grafike na Matematičkom fakultetu.
+Projekat je zamišljen kao prikaz simulacije fudbala, tj. kontrolisanje lopte po terenu. 
 # Uputstvo
 1. `git clone https://github.com/matf-racunarska-grafika/project_base.git`
 2. CLion -> Open -> path/to/my/project_base
@@ -16,7 +16,8 @@ Projekat iz Računarske grafike na Matematičkom fakultetu u Beogradu.
 12. `F1` imgui
 
 Implementirane teme: 
-- zaključno sa 8. nedeljom vežbi,
+- zaključno sa 7. nedeljom vežbi,
+- model
 - blending,
 - face culling,
 - advanced lighting,
@@ -25,4 +26,4 @@ Implementirane teme:
 - hdr,
 - bloom.
 
-Milica Lemajic
+Milica Lemajic, 110/2020.
