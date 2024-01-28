@@ -1,6 +1,7 @@
 # project_base
 Ovo je moj prvi projekat iz Računarske grafike na Matematičkom fakultetu.
 Projekat je zamišljen kao prikaz simulacije fudbala, tj. kontrolisanje lopte po terenu. 
+Vizuelni prikaz projekta možete pogledati na sledećem linku: https://youtu.be/Cgx7T9Pr5Ao
 # Uputstvo
 1. `git clone https://github.com/matf-racunarska-grafika/project_base.git`
 2. CLion -> Open -> path/to/my/project_base
